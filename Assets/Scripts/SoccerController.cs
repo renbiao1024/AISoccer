@@ -14,8 +14,7 @@ public class SoccerController : MonoBehaviour
     [HideInInspector]
     public SoccerEnvController envController;
 
-    public string redGoalTag;
-    public string blueGoalTag;
+    public Collision lastAgent;
 
     private void Start()
     {
@@ -24,13 +23,27 @@ public class SoccerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.CompareTag(redGoalTag))//进了红队球门
+        //TODO:不同碰撞事件
+        if (col.gameObject.CompareTag("redGoal"))//进了红队球门
         {
-            //envController.GoalTouched(Team.Blue);
+            envController.GoalTouched(Team.Blue);
         } 
-        if (col.gameObject.CompareTag(blueGoalTag)) 
+        else if (col.gameObject.CompareTag("blueGoal")) 
         {
-            //envController.GoalTouched(Team.Purple);
+            envController.GoalTouched(Team.Red);
         }
+        else if(col.gameObject.CompareTag("wall"))
+        {
+            lastAgent.gameObject.GetComponent<AgentSoccer>().AddReward(-0.2f);
+        }
+        else if(col.gameObject.CompareTag("redEndline"))
+        {
+            if(lastAgent.gameObject.CompareTag("redAgent"))
+            {
+                
+            }
+        }
+
+
     }
 }

@@ -6,6 +6,12 @@ TagManager:
   tags:
   - blueGoal
   - redGoal
+  - ball
+  - blueEndline
+  - redEndline
+  - wall
+  - redAgent
+  - blueAgent
   layers:
   - Default
   - TransparentFX
